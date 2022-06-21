@@ -49,6 +49,10 @@ steps:
       python-version: "3.7"
 ```
 
+> :information_source: python-lint-annotate expects a `requirements.txt` file in your project.
+> See example to generate one with `pipenv`.
+> Leave an empty one if needed.
+
 ### More Examples
 * [Only lint changed files, and ignore missing docstrings](examples/actions-only_changed_files.yml)
 * [Install requirements from pipenv and lint all files](examples/actions-pipenv_requirements.yml)
