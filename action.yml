@@ -85,18 +85,19 @@ runs:
       with:
         python-version: ${{ inputs.python-version }}
         architecture: x64
+        cache: pip  # Installs project's dependencies
     
     - run: python --version
       shell: bash
 
-    - name: Windows install dependencies
+    - name: Windows install linter dependencies
       if: ${{ runner.os == 'Windows' }}
       run:  |
         pip install -r ${{ github.action_path }}\requirements.txt
         echo "path_sep=" >> $GITHUB_ENV
       shell: pwsh
 
-    - name: Posix install dependencies
+    - name: Posix install linter dependencies
       if: ${{ runner.os != 'Windows' }}
       run:  pip install -r ${{ github.action_path }}/requirements.txt
       shell: bash

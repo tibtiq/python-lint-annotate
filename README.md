@@ -49,8 +49,9 @@ steps:
       python-version: "3.7"
 ```
 
-### Examples
+### More Examples
 * [Only lint changed files, and ignore missing docstrings](examples/actions-only_changed_files.yml)
+* [Install requirements from pipenv and lint all files](examples/actions-pipenv_requirements.yml)
 
 ## Details
 
@@ -58,18 +59,7 @@ Uses `actions/setup-python@v2`. Only python `3.6` - `3.10` version are tested si
 they are by far most common now. Other python `3.x` versions should also work.
 Any python `2.x` versions are unsupported! You can lint on Linux, Windows and MacOS.
 
-The lintner versions are:
-
-```bash
-pycodestyle==2.8.0
-pydocstyle==6.1.1
-pylint==2.12.1
-mypy==0.910
-black==21.11b1
-flake8==4.0.1
-vulture==2.3
-isort==5.10.1
-```
+The linter versions are defined in [requirements.txt](requirements.txt)
 
 ## IMPORTANT - test environment
 
