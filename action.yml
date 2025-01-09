@@ -82,7 +82,7 @@ on:
     outputs:
       command_output:
         description: "The output value"
-        value: ${{ steps.lint_linux.outputs.output1 }}
+        value: ${{ jobs.lint_linux.outputs.output1 }}
 runs:
   using: "composite"
   outputs:
