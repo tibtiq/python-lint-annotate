@@ -125,6 +125,7 @@ runs:
         '${{ inputs.extra-vulture-options }}' \
         '${{ inputs.extra-pydocstyle-options }}' \
         )
+        echo $result
 
         {
           echo 'command_output<<EOF'
@@ -156,6 +157,7 @@ runs:
         '${{ inputs.extra-vulture-options }}' \
         '${{ inputs.extra-pydocstyle-options }}' \
         )
+        echo $result
 
         {
           echo 'command_output<<EOF'
