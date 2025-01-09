@@ -77,8 +77,15 @@ inputs:
     required: false
     default: "3.8"
 
+outputs:
+  command_output:
+    description: "The output value"
+    value: ${{ steps.lint_linux.outputs.output1 }}
+
 runs:
   using: "composite"
+  outputs:
+      output1: ${{ steps.linter_linux.outputs.command_output }}
   steps:
     - name: Setup python
       uses: actions/setup-python@v2
@@ -135,6 +142,7 @@ runs:
       shell: pwsh
 
     - name: Lint on Linux
+      id: linter_linux
       if: ${{ runner.os == 'Linux' }}
       run: |
         result=$( \
