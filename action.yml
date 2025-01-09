@@ -126,6 +126,7 @@ runs:
         '${{ inputs.extra-pydocstyle-options }}' \
         )
 
+        result=$(echo $result | tr '\n' ' ')
         echo "command_output=$result" >> $GITHUB_OUTPUT
       shell: pwsh
 
@@ -153,6 +154,7 @@ runs:
         '${{ inputs.extra-pydocstyle-options }}' \
         )
 
+        result=$(echo $result | tr '\n' ' ')
         echo "command_output=$result" >> $GITHUB_OUTPUT
 
       shell: bash
