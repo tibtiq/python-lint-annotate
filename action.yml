@@ -128,7 +128,7 @@ runs:
 
         {
           echo 'command_output<<EOF'
-          curl "$result"
+          echo "$result"
           echo EOF
         } >> "$GITHUB_OUTPUT"
       shell: pwsh
@@ -159,7 +159,7 @@ runs:
 
         {
           echo 'command_output<<EOF'
-          curl "$result"
+          echo "$result"
           echo EOF
         } >> "$GITHUB_OUTPUT"
       shell: bash
