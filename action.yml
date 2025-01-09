@@ -162,5 +162,5 @@ runs:
         )
         echo $result
 
-        echo "command_output=$(echo "$result" | base64)" >> $GITHUB_OUTPUT
+        echo "command_output=$(echo "$result" | base64 -w0)" >> $GITHUB_OUTPUT
       shell: bash
