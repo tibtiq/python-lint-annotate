@@ -133,9 +133,7 @@ runs:
         )
         echo $result
 
-        echo "command_output<<EOF" >> $GITHUB_OUTPUT
-        echo "$result" >> $GITHUB_OUTPUT
-        echo "EOF" >> $GITHUB_OUTPUT
+        echo "command_output=$(echo "$result" | base64)" >> $GITHUB_OUTPUT
       shell: pwsh
 
     - name: Lint on Linux
@@ -164,7 +162,5 @@ runs:
         )
         echo $result
 
-        echo "command_output<<EOF" >> $GITHUB_OUTPUT
-        echo "$result" >> $GITHUB_OUTPUT
-        echo "EOF" >> $GITHUB_OUTPUT
+        echo "command_output=$(echo "$result" | base64)" >> $GITHUB_OUTPUT
       shell: bash
