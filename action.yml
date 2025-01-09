@@ -126,9 +126,11 @@ runs:
         '${{ inputs.extra-pydocstyle-options }}' \
         )
 
-        echo 'command_output<<EOF' >> $GITHUB_OUTPUT
-        echo "$result" >> $GITHUB_OUTPUT
-        echo 'EOF' >> $GITHUB_OUTPUT
+        {
+          echo 'command_output<<EOF'
+          curl "$result"
+          echo EOF
+        } >> "$GITHUB_OUTPUT"
       shell: pwsh
 
     - name: Lint on Linux
@@ -155,7 +157,9 @@ runs:
         '${{ inputs.extra-pydocstyle-options }}' \
         )
 
-        echo 'command_output<<EOF' >> $GITHUB_OUTPUT
-        echo "$result" >> $GITHUB_OUTPUT
-        echo 'EOF' >> $GITHUB_OUTPUT
+        {
+          echo 'command_output<<EOF'
+          curl "$result"
+          echo EOF
+        } >> "$GITHUB_OUTPUT"
       shell: bash
