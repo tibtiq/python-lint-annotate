@@ -80,7 +80,7 @@ inputs:
 outputs:
   command_output:
     description: "The output value"
-    value: ${{ steps.lint_linux.outputs.output1 }}
+    value: ${{ steps.lint_linux.outputs.command_output }}
 
 
 runs:
