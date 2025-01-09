@@ -124,8 +124,7 @@ runs:
         '${{ inputs.extra-isort-options }}'
         '${{ inputs.extra-vulture-options }}'
         '${{ inputs.extra-pydocstyle-options }}'
-        ) &&
-        echo "command_output=$result" >> $GITHUB_OUTPUT
+        ) && echo "command_output=$result" >> $GITHUB_OUTPUT
       shell: pwsh
 
     - name: Lint on Linux
@@ -150,6 +149,5 @@ runs:
         '${{ inputs.extra-isort-options }}'
         '${{ inputs.extra-vulture-options }}'
         '${{ inputs.extra-pydocstyle-options }}'
-        ) &&
-        echo "command_output=$result" >> $GITHUB_OUTPUT
+        ) && echo "command_output=$result" >> $GITHUB_OUTPUT
       shell: bash
