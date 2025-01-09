@@ -137,7 +137,7 @@ runs:
           echo 'command_output<<EOF'
           echo "$result"
           echo EOF
-        } >> "$GITHUB_OUTPUT"
+        } >> "$GITHUB_ENV"
       shell: pwsh
 
     - name: Lint on Linux
@@ -170,5 +170,5 @@ runs:
           echo 'command_output<<EOF'
           echo "$result"
           echo EOF
-        } >> "$GITHUB_OUTPUT"
+        } >> "$GITHUB_ENV"
       shell: bash
