@@ -133,11 +133,9 @@ runs:
         )
         echo $result
 
-        {
-          echo 'command_output<<EOF'
-          echo "$result"
-          echo EOF
-        } >> "$GITHUB_ENV"
+        echo "command_output<<EOF" >> $GITHUB_OUTPUT
+        echo "$result" >> $GITHUB_OUTPUT
+        echo "EOF" >> $GITHUB_OUTPUT
       shell: pwsh
 
     - name: Lint on Linux
@@ -166,9 +164,7 @@ runs:
         )
         echo $result
 
-        {
-          echo 'command_output<<EOF'
-          echo "$result"
-          echo EOF
-        } >> "$GITHUB_ENV"
+        echo "command_output<<EOF" >> $GITHUB_OUTPUT
+        echo "$result" >> $GITHUB_OUTPUT
+        echo "EOF" >> $GITHUB_OUTPUT
       shell: bash
