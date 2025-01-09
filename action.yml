@@ -83,94 +83,96 @@ on:
       command_output:
         description: "The output value"
         value: ${{ jobs.lint_linux.outputs.output1 }}
-runs:
-  using: "composite"
-  outputs:
-      output1: ${{ steps.linter_linux.outputs.command_output }}
-  steps:
-    - name: Setup python
-      uses: actions/setup-python@v2
-      with:
-        python-version: ${{ inputs.python-version }}
-        architecture: x64
-        cache: pip
 
-    - name: Windows install dependencies
-      if: ${{ runner.os == 'Windows' }}
-      run:  |
-        pip install -r requirements.txt  # project's dependencies
-        pip install -r ${{ github.action_path }}\requirements.txt  # linters
-        echo "path_sep=" >> $GITHUB_ENV
-      shell: pwsh
+jobs:
+  lint-annotate:
+    using: "composite"
+    outputs:
+        output1: ${{ steps.linter_linux.outputs.command_output }}
+    steps:
+      - name: Setup python
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ inputs.python-version }}
+          architecture: x64
+          cache: pip
 
-    - name: Posix install dependencies
-      if: ${{ runner.os != 'Windows' }}
-      run:  |
-        pip install -r requirements.txt  # project's dependencies
-        pip install -r ${{ github.action_path }}/requirements.txt  # linters
-      shell: bash
+      - name: Windows install dependencies
+        if: ${{ runner.os == 'Windows' }}
+        run:  |
+          pip install -r requirements.txt  # project's dependencies
+          pip install -r ${{ github.action_path }}\requirements.txt  # linters
+          echo "path_sep=" >> $GITHUB_ENV
+        shell: pwsh
 
-    - name: Lint on Windows
-      if: ${{ runner.os == 'Windows' }}
-      run: >
-        result=$( \
-        ${{ github.action_path }}\entrypoint.sh \
-        '${{ inputs.python-root-list }}' \
-        ${{ inputs.use-pylint }} \
-        ${{ inputs.use-pycodestyle }} \
-        ${{ inputs.use-flake8 }} \
-        ${{ inputs.use-black }} \
-        ${{ inputs.use-mypy }} \
-        ${{ inputs.use-isort }} \
-        ${{ inputs.use-vulture }} \
-        ${{ inputs.use-pydocstyle }} \
-        '${{ inputs.extra-pylint-options }}' \
-        '${{ inputs.extra-pycodestyle-options }}' \
-        '${{ inputs.extra-flake8-options }}' \
-        '${{ inputs.extra-black-options }}' \
-        '${{ inputs.extra-mypy-options }}' \
-        '${{ inputs.extra-isort-options }}' \
-        '${{ inputs.extra-vulture-options }}' \
-        '${{ inputs.extra-pydocstyle-options }}' \
-        )
-        echo $result
+      - name: Posix install dependencies
+        if: ${{ runner.os != 'Windows' }}
+        run:  |
+          pip install -r requirements.txt  # project's dependencies
+          pip install -r ${{ github.action_path }}/requirements.txt  # linters
+        shell: bash
 
-        {
-          echo 'command_output<<EOF'
-          echo "$result"
-          echo EOF
-        } >> "$GITHUB_OUTPUT"
-      shell: pwsh
+      - name: Lint on Windows
+        if: ${{ runner.os == 'Windows' }}
+        run: >
+          result=$( \
+          ${{ github.action_path }}\entrypoint.sh \
+          '${{ inputs.python-root-list }}' \
+          ${{ inputs.use-pylint }} \
+          ${{ inputs.use-pycodestyle }} \
+          ${{ inputs.use-flake8 }} \
+          ${{ inputs.use-black }} \
+          ${{ inputs.use-mypy }} \
+          ${{ inputs.use-isort }} \
+          ${{ inputs.use-vulture }} \
+          ${{ inputs.use-pydocstyle }} \
+          '${{ inputs.extra-pylint-options }}' \
+          '${{ inputs.extra-pycodestyle-options }}' \
+          '${{ inputs.extra-flake8-options }}' \
+          '${{ inputs.extra-black-options }}' \
+          '${{ inputs.extra-mypy-options }}' \
+          '${{ inputs.extra-isort-options }}' \
+          '${{ inputs.extra-vulture-options }}' \
+          '${{ inputs.extra-pydocstyle-options }}' \
+          )
+          echo $result
 
-    - name: Lint on Linux
-      id: linter_linux
-      if: ${{ runner.os == 'Linux' }}
-      run: |
-        result=$( \
-        ${{ github.action_path }}/entrypoint.sh \
-        '${{ inputs.python-root-list }}' \
-        ${{ inputs.use-pylint }} \
-        ${{ inputs.use-pycodestyle }} \
-        ${{ inputs.use-flake8 }} \
-        ${{ inputs.use-black }} \
-        ${{ inputs.use-mypy }} \
-        ${{ inputs.use-isort }} \
-        ${{ inputs.use-vulture }} \
-        ${{ inputs.use-pydocstyle }} \
-        '${{ inputs.extra-pylint-options }}' \
-        '${{ inputs.extra-pycodestyle-options }}' \
-        '${{ inputs.extra-flake8-options }}' \
-        '${{ inputs.extra-black-options }}' \
-        '${{ inputs.extra-mypy-options }}' \
-        '${{ inputs.extra-isort-options }}' \
-        '${{ inputs.extra-vulture-options }}' \
-        '${{ inputs.extra-pydocstyle-options }}' \
-        )
-        echo $result
+          {
+            echo 'command_output<<EOF'
+            echo "$result"
+            echo EOF
+          } >> "$GITHUB_OUTPUT"
+        shell: pwsh
 
-        {
-          echo 'command_output<<EOF'
-          echo "$result"
-          echo EOF
-        } >> "$GITHUB_OUTPUT"
-      shell: bash
+      - name: Lint on Linux
+        id: linter_linux
+        if: ${{ runner.os == 'Linux' }}
+        run: |
+          result=$( \
+          ${{ github.action_path }}/entrypoint.sh \
+          '${{ inputs.python-root-list }}' \
+          ${{ inputs.use-pylint }} \
+          ${{ inputs.use-pycodestyle }} \
+          ${{ inputs.use-flake8 }} \
+          ${{ inputs.use-black }} \
+          ${{ inputs.use-mypy }} \
+          ${{ inputs.use-isort }} \
+          ${{ inputs.use-vulture }} \
+          ${{ inputs.use-pydocstyle }} \
+          '${{ inputs.extra-pylint-options }}' \
+          '${{ inputs.extra-pycodestyle-options }}' \
+          '${{ inputs.extra-flake8-options }}' \
+          '${{ inputs.extra-black-options }}' \
+          '${{ inputs.extra-mypy-options }}' \
+          '${{ inputs.extra-isort-options }}' \
+          '${{ inputs.extra-vulture-options }}' \
+          '${{ inputs.extra-pydocstyle-options }}' \
+          )
+          echo $result
+
+          {
+            echo 'command_output<<EOF'
+            echo "$result"
+            echo EOF
+          } >> "$GITHUB_OUTPUT"
+        shell: bash
